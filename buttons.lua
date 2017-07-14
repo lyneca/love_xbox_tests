@@ -27,9 +27,9 @@ function draw_button(button)
 		love.graphics.setColor(unpack(button.color))
 		love.graphics.circle("fill", button.x, button.y, BUTTON_RADIUS * 1.2)
 		if button.pressed then 
-			love.graphics.setColor(unpack(darker(button.color, 50)))
+			love.graphics.setColor(unpack(colorfrac(darker(button.color, 100), darker(button.color, 50), button.c)))
 		else
-			love.graphics.setColor(unpack(darker(button.color, 100)))
+			love.graphics.setColor(unpack(colorfrac(darker(button.color, 50), darker(button.color, 100), button.c)))
 		end
 		love.graphics.circle("fill", button.x, button.y, BUTTON_RADIUS*1.2 - BUTTON_OUTLINE)
 	end
@@ -39,9 +39,9 @@ function draw_face_button(button)
 	love.graphics.setColor(unpack(button.color))
 	love.graphics.circle("fill", button.x, button.y, BUTTON_RADIUS)
 	if button.pressed then 
-		love.graphics.setColor(unpack(darker(button.color, 50)))
+		love.graphics.setColor(unpack(colorfrac(darker(button.color, 100), darker(button.color, 50), button.c)))
 	else
-		love.graphics.setColor(unpack(darker(button.color, 100)))
+		love.graphics.setColor(unpack(colorfrac(darker(button.color, 50), darker(button.color, 100), button.c)))
 	end
 	love.graphics.circle("fill", button.x, button.y, BUTTON_RADIUS - BUTTON_OUTLINE)
 end
@@ -56,9 +56,9 @@ function draw_special_button(button)
 		S_BUTTON_HEIGHT
 	)
 	if button.pressed then
-		love.graphics.setColor(unpack(darker(button.color, 10)))
+		love.graphics.setColor(unpack(colorfrac(darker(button.color, 30), darker(button.color, 10), button.c)))
 	else
-		love.graphics.setColor(unpack(darker(button.color, 30)))
+		love.graphics.setColor(unpack(colorfrac(darker(button.color, 10), darker(button.color, 30), button.c)))
 	end
 	love.graphics.rectangle(
 		"fill",
@@ -79,9 +79,9 @@ function draw_shoulder_button(button)
 		SHOULDER_BUTTON_HEIGHT
 	)
 	if button.pressed then
-		love.graphics.setColor(unpack(darker(button.color, 10)))
+		love.graphics.setColor(unpack(colorfrac(darker(button.color, 30), darker(button.color, 10), button.c)))
 	else
-		love.graphics.setColor(unpack(darker(button.color, 30)))
+		love.graphics.setColor(unpack(colorfrac(darker(button.color, 10), darker(button.color, 30), button.c)))
 	end
 	love.graphics.rectangle(
 		"fill",
@@ -105,9 +105,9 @@ function draw_dpad_button(button)
 			DPAD_BUTTON_HEIGHT
 		)
 		if button.pressed then 
-			love.graphics.setColor(unpack(darker(button.color, 10)))
+			love.graphics.setColor(unpack(colorfrac(darker(button.color, 30), darker(button.color, 10), button.c)))
 		else
-			love.graphics.setColor(unpack(darker(button.color, 30)))
+			love.graphics.setColor(unpack(colorfrac(darker(button.color, 10), darker(button.color, 30), button.c)))
 		end
 		love.graphics.rectangle(
 			"fill",
@@ -125,9 +125,9 @@ function draw_dpad_button(button)
 			DPAD_BUTTON_WIDTH
 		)
 		if button.pressed then 
-			love.graphics.setColor(unpack(darker(button.color, 10)))
+			love.graphics.setColor(unpack(colorfrac(darker(button.color, 30), darker(button.color, 10), button.c)))
 		else
-			love.graphics.setColor(unpack(darker(button.color, 30)))
+			love.graphics.setColor(unpack(colorfrac(darker(button.color, 10), darker(button.color, 30), button.c)))
 		end
 		love.graphics.rectangle(
 			"fill",

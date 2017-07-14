@@ -10,29 +10,29 @@ end
 update_screen_size()
 
 function load_objects()
-	b_a = {t = 0, x = midx + relx(220), y = midy + rely(50), color = {0, 150, 0}, pressed = false}
-	b_b = {t = 0, x = midx + relx(270), y = midy,            color = {150, 0, 0}, pressed = false}
-	b_x = {t = 0, x = midx + relx(170), y = midy,            color = {0, 0, 150}, pressed = false}
-	b_y = {t = 0, x = midx + relx(220), y = midy - rely(50), color = {150, 150, 0}, pressed = false}
+	b_a = {t = 0, x = midx + relx(220), y = midy + rely(50), color = {0, 150, 0}, pressed = false, c = 0}
+	b_b = {t = 0, x = midx + relx(270), y = midy,            color = {150, 0, 0}, pressed = false, c = 0}
+	b_x = {t = 0, x = midx + relx(170), y = midy,            color = {0, 0, 150}, pressed = false, c = 0}
+	b_y = {t = 0, x = midx + relx(220), y = midy - rely(50), color = {150, 150, 0}, pressed = false, c = 0}
 
-	b_guide = {t = 4, x = midx, y = midy, color = {0, 200, 0}, pressed = false}
+	b_guide = {t = 4, x = midx, y = midy, color = {0, 200, 0}, pressed = false, c = 0}
 
-	b_shoulder_left  = {t = 1, x = midx - relx(200), y = midy - rely(150), color = {100, 100, 100}, pressed = false}
-	b_shoulder_right = {t = 1, x = midx + relx(200), y = midy - rely(150), color = {100, 100, 100}, pressed = false}
+	b_shoulder_left  = {t = 1, x = midx - relx(200), y = midy - rely(150), color = {100, 100, 100}, pressed = false, c = 0}
+	b_shoulder_right = {t = 1, x = midx + relx(200), y = midy - rely(150), color = {100, 100, 100}, pressed = false, c = 0}
 
-	b_start = {t = 2, x = midx + relx(70), y = midy, color = {50, 50, 50}, pressed = false}
-	b_back  = {t = 2, x = midx - relx(70), y = midy, color = {50, 50, 50}, pressed = false}
+	b_start = {t = 2, x = midx + relx(70), y = midy, color = {50, 50, 50}, pressed = false, c = 0}
+	b_back  = {t = 2, x = midx - relx(70), y = midy, color = {50, 50, 50}, pressed = false, c = 0}
 
 	left_hat  = {x = midx - relx(220), y = midy,             hx = 0, hy = 0, xa = 1, ya = 2, b = 10, pressed = false}
 	right_hat = {x = midx + relx(100), y = midy + rely(150), hx = 0, hy = 0, xa = 4, ya = 5, b = 11, pressed = false}
 
 	left_trigger  = {x = midx - relx(200), y = midy - rely(220), color = {50, 50, 50}, v = 0, a = 3, reversed = true}
-	right_trigger = {x = midx + relx(200), y = midy - rely(220), color = {50, 50, 50}, v = 0, a = 6}
+	right_trigger = {x = midx + relx(200), y = midy - rely(220), color = {50, 50, 50}, v = 0, a = 6} 
 
-	dp_up    = {t = 3, x = midx - relx(130), y = midy + rely(110), color = {50, 50, 50}, pressed = false, rot = 1}
-	dp_down  = {t = 3, x = midx - relx(130), y = midy + rely(190), color = {50, 50, 50}, pressed = false, rot = 1}
-	dp_left  = {t = 3, x = midx - relx(170), y = midy + rely(150), color = {50, 50, 50}, pressed = false, rot = 0}
-	dp_right = {t = 3, x = midx - relx(90),  y = midy + rely(150), color = {50, 50, 50}, pressed = false, rot = 0}
+	dp_up    = {t = 3, x = midx - relx(130), y = midy + rely(110), color = {50, 50, 50}, pressed = false, rot = 1, c = 0}
+	dp_down  = {t = 3, x = midx - relx(130), y = midy + rely(190), color = {50, 50, 50}, pressed = false, rot = 1, c = 0}
+	dp_left  = {t = 3, x = midx - relx(170), y = midy + rely(150), color = {50, 50, 50}, pressed = false, rot = 0, c = 0}
+	dp_right = {t = 3, x = midx - relx(90),  y = midy + rely(150), color = {50, 50, 50}, pressed = false, rot = 0, c = 0}
 
 	buttons = {b_a, b_b, b_x, b_y, b_shoulder_left, b_shoulder_right, b_back, b_start, b_guide, false, false, dp_left, dp_right, dp_up, dp_down}
 	hats = {left_hat, right_hat}
@@ -93,6 +93,10 @@ function love.update(dt)
 	if not joystick then return end
 	for i, button in ipairs(buttons) do
 		if button then 
+			if button.c < 1 then
+				button.c = button.c + 0.2
+			end
+			if button.pressed ~= joystick:isDown(i) then button.c = 0 end
 			button.pressed = joystick:isDown(i)
 		end
 	end
@@ -117,7 +121,7 @@ function love.draw()
 --		right_hat.y + HAT_BASE_RADIUS
 --	)
 	for i, button in ipairs(buttons) do
-		if button ~= nil then
+		if button then
 			draw_button(button)
 		end
 	end

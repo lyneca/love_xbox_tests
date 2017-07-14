@@ -4,9 +4,9 @@ end
 
 function colorfrac(current, target, amount)
 	return {
-		current[0] + (target[0] - current[0]) * amount,
 		current[1] + (target[1] - current[1]) * amount,
 		current[2] + (target[2] - current[2]) * amount,
+		current[3] + (target[3] - current[3]) * amount,
 	}
 end
 
