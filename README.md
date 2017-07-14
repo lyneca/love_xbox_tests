@@ -2,7 +2,7 @@
 A couple of tests for xbox controller support with Lua's LÖVE framework.
 
 ## Screenshots
-[!screenshot of program](screen.png)
+![screenshot of program](screen.png)
 
 ## Running
 ```bash
