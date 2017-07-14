@@ -51,6 +51,15 @@ function event(message)
 	if #events >= math.floor(love.graphics.getHeight() / (3 * 15)) then table.remove(events, 1) end
 end
 
+function print_axis_vals()
+	love.graphics.print('l_hat_x: ' .. pad(math.floor(left_hat.hx     * 255), 3), midx - 50, midy - rely(150 + 15 * 5))
+	love.graphics.print('l_hat_y: ' .. pad(math.floor(left_hat.hy     * 255), 3), midx - 50, midy - rely(150 + 15 * 4))
+	love.graphics.print('r_hat_x: ' .. pad(math.floor(right_hat.hx    * 255), 3), midx - 50, midy - rely(150 + 15 * 3))
+	love.graphics.print('r_hat_y: ' .. pad(math.floor(right_hat.hy    * 255), 3), midx - 50, midy - rely(150 + 15 * 2))
+	love.graphics.print('l_trigg: ' .. pad(math.floor(left_trigger.v  * 255), 3), midx - 50, midy - rely(150 + 15 * 1))
+	love.graphics.print('r_trigg: ' .. pad(math.floor(right_trigger.v * 255), 3), midx - 50, midy - rely(150 + 15 * 0))
+end
+
 function print_debugs()
 	love.graphics.setColor(255, 255, 255)
 	for i, message in ipairs(debugs) do
@@ -131,5 +140,6 @@ function love.draw()
 	for i, trigger in ipairs(triggers) do
 		draw_trigger(trigger)
 	end
+	print_axis_vals()
 	print_debugs()
 end

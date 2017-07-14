@@ -19,3 +19,12 @@ function rely(y)
 	--return (y / 600) * love.graphics.getHeight()
 	return y
 end
+
+function pad(a, n)
+	a = ''..a
+	if string.sub(a, 1, 1) == '-' then 
+		return '-' .. string.rep('0', n - (#a-1)) .. string.sub(a, 2)
+	else
+		return ' ' .. string.rep('0', n - #a) .. a
+	end
+end
